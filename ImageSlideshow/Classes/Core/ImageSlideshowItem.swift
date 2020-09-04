@@ -176,7 +176,7 @@ open class ImageSlideshowItem: UIScrollView, UIScrollViewDelegate {
     }
 
     func zoomOut() {
-        self.setZoomScale(minimumZoomScale, animated: false)
+        self.setZoomScale(minimumZoomScale, animated: true)
     }
 
     @objc func tapZoom() {
@@ -201,6 +201,18 @@ open class ImageSlideshowItem: UIScrollView, UIScrollViewDelegate {
                 return CGSize(width: screenSize().width, height: screenSize().width / picSize.width * picSize.height)
             } else {
                 return CGSize(width: screenSize().height / picSize.height * picSize.width, height: screenSize().height)
+            }
+        } else if let image = imageView.image, imageView.contentMode == .scaleAspectFill {
+            let picSize = image.size
+            let picRatio = picSize.width / picSize.height
+            let screenRatio = screenSize().width / screenSize().height
+
+            if picRatio > screenRatio {
+                let sz = CGSize(width: screenSize().height * picRatio, height: screenSize().height)
+                return sz
+            } else {
+                let sz = CGSize(width: screenSize().width, height: screenSize().width / picRatio)
+                return sz
             }
         } else {
             return CGSize(width: screenSize().width, height: screenSize().height)
