@@ -329,7 +329,7 @@ open class ImageSlideshow: UIView {
 
         if circular && (scrollViewImages.count > 1) {
             scrollViewPage = 1
-            scrollView.scrollRectToVisible(CGRect(x: scrollView.frame.size.width, y: 0, width: scrollView.frame.size.width, height: scrollView.frame.size.height), animated: false)
+            scrollView.scrollRectToVisible(CGRect(x: scrollView.frame.size.width, y: 0, width: scrollView.frame.size.width, height: scrollView.frame.size.height), animated: true)
         } else {
             scrollViewPage = 0
         }
